@@ -1,0 +1,18 @@
+# Files and folders of the operating system
+.DS_Store
+Thumbs.db
+
+# Editor files
+.idea
+*.sublime*
+.vscode
+
+# Supporting files
+*.log*
+node_modules/
+
+# Folder with collected project files
+build/
+
+# Local configuration files
+.env
