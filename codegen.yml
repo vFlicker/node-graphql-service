@@ -1,0 +1,8 @@
+schema: './src/modules/genres/schema.ts'
+generates:
+    './src/types/resolvers.ts':
+        config:
+            contextType: './context#Context'
+        plugins:
+            - typescript
+            - typescript-resolvers
