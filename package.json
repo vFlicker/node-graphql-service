@@ -5,11 +5,13 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "start": "ts-node-dev ./src/index.ts",
-        "build": "rimraf ./build && tsc",
-        "generate": "graphql-codegen"
+        "generate": "graphql-codegen",
+        "start": "npm run generate && ts-node-dev ./src/index.ts",
+        "build": "rimraf ./build && npm run generate && tsc"
     },
     "dependencies": {
+        "@graphql-tools/load-files": "^6.6.0",
+        "@graphql-tools/merge": "^8.3.0",
         "apollo-datasource-rest": "^3.6.1",
         "apollo-server": "^3.9.0",
         "graphql": "^16.5.0"

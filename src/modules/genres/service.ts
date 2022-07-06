@@ -1,5 +1,3 @@
-import 'dotenv/config'
-
 import { RESTDataSource } from 'apollo-datasource-rest'
 
 export class GenreAPI extends RESTDataSource {

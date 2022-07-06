@@ -1,4 +1,4 @@
-schema: './src/modules/genres/schema.ts'
+schema: './src/modules/**/schema.ts'
 generates:
     './src/types/resolvers.ts':
         config:

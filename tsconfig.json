@@ -9,7 +9,7 @@
 
         /* Module Resolution Options */
         "esModuleInterop": true,
-        "moduleResolution": "Node16",
+        "moduleResolution": "Node",
 
         /* Advanced Options */
         "skipLibCheck": true,

@@ -15,6 +15,15 @@ export type Scalars = {
   Float: number;
 };
 
+export type Band = {
+  __typename?: 'Band';
+  _id: Scalars['ID'];
+  genres?: Maybe<Array<Maybe<Genre>>>;
+  name?: Maybe<Scalars['String']>;
+  origin?: Maybe<Scalars['String']>;
+  website?: Maybe<Scalars['String']>;
+};
+
 export type Genre = {
   __typename?: 'Genre';
   _id: Scalars['ID'];
@@ -26,8 +35,15 @@ export type Genre = {
 
 export type Query = {
   __typename?: 'Query';
+  band?: Maybe<Band>;
+  bands: Array<Band>;
   genre?: Maybe<Genre>;
   genres: Array<Genre>;
+};
+
+
+export type QueryBandArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -104,6 +120,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  Band: ResolverTypeWrapper<Band>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Genre: ResolverTypeWrapper<Genre>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
@@ -114,12 +131,22 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  Band: Band;
   Boolean: Scalars['Boolean'];
   Genre: Genre;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
   Query: {};
   String: Scalars['String'];
+};
+
+export type BandResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Band'] = ResolversParentTypes['Band']> = {
+  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  genres?: Resolver<Maybe<Array<Maybe<ResolversTypes['Genre']>>>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  origin?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  website?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type GenreResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Genre'] = ResolversParentTypes['Genre']> = {
@@ -132,11 +159,14 @@ export type GenreResolvers<ContextType = Context, ParentType extends ResolversPa
 };
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  band?: Resolver<Maybe<ResolversTypes['Band']>, ParentType, ContextType, RequireFields<QueryBandArgs, 'id'>>;
+  bands?: Resolver<Array<ResolversTypes['Band']>, ParentType, ContextType>;
   genre?: Resolver<Maybe<ResolversTypes['Genre']>, ParentType, ContextType, RequireFields<QueryGenreArgs, 'id'>>;
   genres?: Resolver<Array<ResolversTypes['Genre']>, ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = Context> = {
+  Band?: BandResolvers<ContextType>;
   Genre?: GenreResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
