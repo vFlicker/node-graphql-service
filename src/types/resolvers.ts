@@ -1,4 +1,7 @@
 import { GraphQLResolveInfo } from 'graphql';
+import { Artist } from '../modules/artists/interfaces';
+import { Band } from '../modules/bands/interfaces';
+import { Genre } from '../modules/genres/interfaces';
 import { Context } from './context';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -13,6 +16,19 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+};
+
+export type Artist = {
+  __typename?: 'Artist';
+  _id: Scalars['ID'];
+  bands?: Maybe<Array<Maybe<Band>>>;
+  birthDate?: Maybe<Scalars['String']>;
+  birthPlace?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  instruments?: Maybe<Array<Maybe<Scalars['String']>>>;
+  middleName?: Maybe<Scalars['String']>;
+  secondName?: Maybe<Scalars['String']>;
 };
 
 export type Band = {
@@ -35,10 +51,17 @@ export type Genre = {
 
 export type Query = {
   __typename?: 'Query';
+  artist?: Maybe<Artist>;
+  artists: Array<Artist>;
   band?: Maybe<Band>;
   bands: Array<Band>;
   genre?: Maybe<Genre>;
   genres: Array<Genre>;
+};
+
+
+export type QueryArtistArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -120,6 +143,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  Artist: ResolverTypeWrapper<Artist>;
   Band: ResolverTypeWrapper<Band>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Genre: ResolverTypeWrapper<Genre>;
@@ -131,6 +155,7 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  Artist: Artist;
   Band: Band;
   Boolean: Scalars['Boolean'];
   Genre: Genre;
@@ -138,6 +163,19 @@ export type ResolversParentTypes = {
   Int: Scalars['Int'];
   Query: {};
   String: Scalars['String'];
+};
+
+export type ArtistResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Artist'] = ResolversParentTypes['Artist']> = {
+  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  bands?: Resolver<Maybe<Array<Maybe<ResolversTypes['Band']>>>, ParentType, ContextType>;
+  birthDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  birthPlace?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  instruments?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  middleName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  secondName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BandResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Band'] = ResolversParentTypes['Band']> = {
@@ -159,6 +197,8 @@ export type GenreResolvers<ContextType = Context, ParentType extends ResolversPa
 };
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  artist?: Resolver<Maybe<ResolversTypes['Artist']>, ParentType, ContextType, RequireFields<QueryArtistArgs, 'id'>>;
+  artists?: Resolver<Array<ResolversTypes['Artist']>, ParentType, ContextType>;
   band?: Resolver<Maybe<ResolversTypes['Band']>, ParentType, ContextType, RequireFields<QueryBandArgs, 'id'>>;
   bands?: Resolver<Array<ResolversTypes['Band']>, ParentType, ContextType>;
   genre?: Resolver<Maybe<ResolversTypes['Genre']>, ParentType, ContextType, RequireFields<QueryGenreArgs, 'id'>>;
@@ -166,6 +206,7 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
 };
 
 export type Resolvers<ContextType = Context> = {
+  Artist?: ArtistResolvers<ContextType>;
   Band?: BandResolvers<ContextType>;
   Genre?: GenreResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;

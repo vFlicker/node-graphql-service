@@ -3,6 +3,10 @@ generates:
     './src/types/resolvers.ts':
         config:
             contextType: './context#Context'
+            mappers:
+                Artist: '../modules/artists/interfaces#Artist'
+                Band: '../modules/bands/interfaces#Band'
+                Genre: '../modules/genres/interfaces#Genre'
         plugins:
             - typescript
             - typescript-resolvers
