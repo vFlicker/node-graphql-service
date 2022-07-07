@@ -1,4 +1,4 @@
-import { dataSources } from '../utils'
+import { dataSources } from '../config'
 
 type DataSources = ReturnType<typeof dataSources>
 

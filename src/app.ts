@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server'
 import 'dotenv/config.js'
 
-import { apolloServerConfig } from './utils'
+import { apolloServerConfig } from './config'
 
 export const server = new ApolloServer(apolloServerConfig)
 
