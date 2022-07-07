@@ -1,15 +1,17 @@
 import { RESTDataSource } from 'apollo-datasource-rest'
 
-export class GenreAPI extends RESTDataSource {
+import { Genre } from './interfaces'
+
+export class GenresAPI extends RESTDataSource {
     constructor() {
         super()
         this.baseURL = process.env.GENRES_API
     }
 
-    getAllGenres = async () => {
+    getAllGenres = async (): Promise<Genre[]> => {
         const { items } = await this.get('/')
         return items
     }
 
-    getGenreById = (id: string) => this.get(`/${id}`)
+    getGenreById = (id: string): Promise<Genre> => this.get(`/${id}`)
 }
