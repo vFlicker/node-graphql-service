@@ -18,5 +18,21 @@ export const resolvers: Resolvers = {
             }
             return bands
         },
+        members: async ({ members }, _, { dataSources }) => {
+            const memberList = []
+            for (const { artistId: id, instrument, years } of members) {
+                const artist = await dataSources.artistsService.getItemById(id)
+                const { firstName, secondName, middleName } = artist
+                memberList.push({
+                    id,
+                    firstName,
+                    secondName,
+                    middleName,
+                    instrument,
+                    years,
+                })
+            }
+            return memberList
+        },
     },
 }
