@@ -7,7 +7,7 @@ export const typeDefs = gql`
     }
 
     type Genre {
-        _id: ID!
+        id: ID!
         name: String
         description: String
         country: String

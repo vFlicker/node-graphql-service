@@ -7,7 +7,7 @@ export const typeDefs = gql`
     }
 
     type Band {
-        _id: ID!
+        id: ID!
         name: String
         origin: String
         website: String

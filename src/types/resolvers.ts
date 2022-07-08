@@ -20,12 +20,12 @@ export type Scalars = {
 
 export type Artist = {
   __typename?: 'Artist';
-  _id: Scalars['ID'];
   bands?: Maybe<Array<Maybe<Band>>>;
   birthDate?: Maybe<Scalars['String']>;
   birthPlace?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   firstName?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
   instruments?: Maybe<Array<Maybe<Scalars['String']>>>;
   middleName?: Maybe<Scalars['String']>;
   secondName?: Maybe<Scalars['String']>;
@@ -33,8 +33,8 @@ export type Artist = {
 
 export type Band = {
   __typename?: 'Band';
-  _id: Scalars['ID'];
   genres?: Maybe<Array<Maybe<Genre>>>;
+  id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
   origin?: Maybe<Scalars['String']>;
   website?: Maybe<Scalars['String']>;
@@ -42,9 +42,9 @@ export type Band = {
 
 export type Genre = {
   __typename?: 'Genre';
-  _id: Scalars['ID'];
   country?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
   year?: Maybe<Scalars['Int']>;
 };
@@ -166,12 +166,12 @@ export type ResolversParentTypes = {
 };
 
 export type ArtistResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Artist'] = ResolversParentTypes['Artist']> = {
-  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   bands?: Resolver<Maybe<Array<Maybe<ResolversTypes['Band']>>>, ParentType, ContextType>;
   birthDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   birthPlace?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   instruments?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   middleName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   secondName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -179,8 +179,8 @@ export type ArtistResolvers<ContextType = Context, ParentType extends ResolversP
 };
 
 export type BandResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Band'] = ResolversParentTypes['Band']> = {
-  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   genres?: Resolver<Maybe<Array<Maybe<ResolversTypes['Genre']>>>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   origin?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   website?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -188,9 +188,9 @@ export type BandResolvers<ContextType = Context, ParentType extends ResolversPar
 };
 
 export type GenreResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Genre'] = ResolversParentTypes['Genre']> = {
-  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

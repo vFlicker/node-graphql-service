@@ -9,4 +9,7 @@ export const resolvers: Resolvers = {
             return dataSources.genresAPI.getGenreById(id)
         },
     },
+    Genre: {
+        id: ({ _id }) => _id,
+    },
 }

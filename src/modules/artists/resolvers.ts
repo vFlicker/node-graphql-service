@@ -10,6 +10,7 @@ export const resolvers: Resolvers = {
         },
     },
     Artist: {
+        id: ({ _id }) => _id,
         bands: ({ bandsIds }, _, { dataSources }) => {
             const bands = []
             for (const bandsId of bandsIds) {

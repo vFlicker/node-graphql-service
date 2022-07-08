@@ -9,4 +9,7 @@ export const resolvers: Resolvers = {
             return dataSources.bandsAPI.getBandById(id)
         },
     },
+    Band: {
+        id: ({ _id }) => _id,
+    },
 }
