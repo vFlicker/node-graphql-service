@@ -22,6 +22,17 @@ export type Scalars = {
   Float: number;
 };
 
+export type Album = {
+  __typename?: 'Album';
+  artists?: Maybe<Array<Maybe<Artist>>>;
+  bands?: Maybe<Array<Maybe<Band>>>;
+  genres?: Maybe<Array<Maybe<Genre>>>;
+  id: Scalars['ID'];
+  image?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  released?: Maybe<Scalars['Int']>;
+};
+
 export type Artist = {
   __typename?: 'Artist';
   bands?: Maybe<Array<Maybe<Band>>>;
@@ -64,20 +75,21 @@ export type Member = {
   years?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
-export type MemberInput = {
-  artist: Scalars['ID'];
-  instrument?: InputMaybe<Scalars['String']>;
-  years?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
-
 export type Query = {
   __typename?: 'Query';
+  album?: Maybe<Album>;
+  albums: Array<Album>;
   artist?: Maybe<Artist>;
   artists: Array<Artist>;
   band?: Maybe<Band>;
   bands: Array<Band>;
   genre?: Maybe<Genre>;
   genres: Array<Genre>;
+};
+
+
+export type QueryAlbumArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -164,6 +176,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  Album: ResolverTypeWrapper<Album>;
   Artist: ResolverTypeWrapper<Artist>;
   Band: ResolverTypeWrapper<Band>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
@@ -171,13 +184,13 @@ export type ResolversTypes = {
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Member: ResolverTypeWrapper<Member>;
-  MemberInput: MemberInput;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  Album: Album;
   Artist: Artist;
   Band: Band;
   Boolean: Scalars['Boolean'];
@@ -185,9 +198,19 @@ export type ResolversParentTypes = {
   ID: Scalars['ID'];
   Int: Scalars['Int'];
   Member: Member;
-  MemberInput: MemberInput;
   Query: {};
   String: Scalars['String'];
+};
+
+export type AlbumResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Album'] = ResolversParentTypes['Album']> = {
+  artists?: Resolver<Maybe<Array<Maybe<ResolversTypes['Artist']>>>, ParentType, ContextType>;
+  bands?: Resolver<Maybe<Array<Maybe<ResolversTypes['Band']>>>, ParentType, ContextType>;
+  genres?: Resolver<Maybe<Array<Maybe<ResolversTypes['Genre']>>>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  released?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ArtistResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Artist'] = ResolversParentTypes['Artist']> = {
@@ -233,6 +256,8 @@ export type MemberResolvers<ContextType = Context, ParentType extends ResolversP
 };
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  album?: Resolver<Maybe<ResolversTypes['Album']>, ParentType, ContextType, RequireFields<QueryAlbumArgs, 'id'>>;
+  albums?: Resolver<Array<ResolversTypes['Album']>, ParentType, ContextType>;
   artist?: Resolver<Maybe<ResolversTypes['Artist']>, ParentType, ContextType, RequireFields<QueryArtistArgs, 'id'>>;
   artists?: Resolver<Array<ResolversTypes['Artist']>, ParentType, ContextType>;
   band?: Resolver<Maybe<ResolversTypes['Band']>, ParentType, ContextType, RequireFields<QueryBandArgs, 'id'>>;
@@ -242,6 +267,7 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
 };
 
 export type Resolvers<ContextType = Context> = {
+  Album?: AlbumResolvers<ContextType>;
   Artist?: ArtistResolvers<ContextType>;
   Band?: BandResolvers<ContextType>;
   Genre?: GenreResolvers<ContextType>;
