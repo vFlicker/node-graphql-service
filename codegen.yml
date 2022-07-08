@@ -4,9 +4,13 @@ generates:
         config:
             contextType: './context#Context'
             mappers:
+                Album: '../modules/albums/interfaces#Album'
                 Artist: '../modules/artists/interfaces#Artist'
                 Band: '../modules/bands/interfaces#Band'
+                Favorite: '../modules/favorites/interfaces#Favorite'
                 Genre: '../modules/genres/interfaces#Genre'
+                Track: '../modules/tracks/interfaces#Track'
+                User: '../modules/users/interfaces#User'
         plugins:
             - typescript
             - typescript-resolvers

@@ -1,7 +1,11 @@
 import { GraphQLResolveInfo } from 'graphql';
+import { Album } from '../modules/albums/interfaces';
 import { Artist } from '../modules/artists/interfaces';
 import { Band } from '../modules/bands/interfaces';
+import { Favorite } from '../modules/favorites/interfaces';
 import { Genre } from '../modules/genres/interfaces';
+import { Track } from '../modules/tracks/interfaces';
+import { User } from '../modules/users/interfaces';
 import { Context } from './context';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
