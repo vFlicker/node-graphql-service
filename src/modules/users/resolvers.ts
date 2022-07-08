@@ -6,7 +6,7 @@ export const resolvers: Resolvers = {
             return dataSources.usersService.jwt(userData)
         },
         user: (_, { id }, { dataSources }) => {
-            return dataSources.usersService.getItemById(id)
+            return dataSources.usersService.getUserById(id)
         },
     },
     User: {

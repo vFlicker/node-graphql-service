@@ -12,6 +12,7 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -57,6 +58,16 @@ export type Band = {
   website?: Maybe<Scalars['String']>;
 };
 
+export type Favourites = {
+  __typename?: 'Favourites';
+  artists?: Maybe<Array<Maybe<Artist>>>;
+  bands?: Maybe<Array<Maybe<Band>>>;
+  genres?: Maybe<Array<Maybe<Genre>>>;
+  id: Scalars['ID'];
+  tracks?: Maybe<Array<Maybe<Track>>>;
+  userId?: Maybe<Scalars['ID']>;
+};
+
 export type Genre = {
   __typename?: 'Genre';
   country?: Maybe<Scalars['String']>;
@@ -64,11 +75,6 @@ export type Genre = {
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
   year?: Maybe<Scalars['Int']>;
-};
-
-export type Jwt = {
-  __typename?: 'JWT';
-  jwt?: Maybe<Scalars['String']>;
 };
 
 export type Member = {
@@ -89,9 +95,10 @@ export type Query = {
   artists: Array<Artist>;
   band?: Maybe<Band>;
   bands: Array<Band>;
+  favourites: Array<Favourites>;
   genre?: Maybe<Genre>;
   genres: Array<Genre>;
-  jwt?: Maybe<Jwt>;
+  jwt?: Maybe<Scalars['String']>;
   track?: Maybe<Track>;
   tracks: Array<Track>;
   user?: Maybe<User>;
@@ -227,10 +234,10 @@ export type ResolversTypes = {
   Artist: ResolverTypeWrapper<Artist>;
   Band: ResolverTypeWrapper<Band>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Favourites: ResolverTypeWrapper<Omit<Favourites, 'artists' | 'bands' | 'genres' | 'tracks'> & { artists?: Maybe<Array<Maybe<ResolversTypes['Artist']>>>, bands?: Maybe<Array<Maybe<ResolversTypes['Band']>>>, genres?: Maybe<Array<Maybe<ResolversTypes['Genre']>>>, tracks?: Maybe<Array<Maybe<ResolversTypes['Track']>>> }>;
   Genre: ResolverTypeWrapper<Genre>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
-  JWT: ResolverTypeWrapper<Jwt>;
   Member: ResolverTypeWrapper<Member>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
@@ -244,10 +251,10 @@ export type ResolversParentTypes = {
   Artist: Artist;
   Band: Band;
   Boolean: Scalars['Boolean'];
+  Favourites: Omit<Favourites, 'artists' | 'bands' | 'genres' | 'tracks'> & { artists?: Maybe<Array<Maybe<ResolversParentTypes['Artist']>>>, bands?: Maybe<Array<Maybe<ResolversParentTypes['Band']>>>, genres?: Maybe<Array<Maybe<ResolversParentTypes['Genre']>>>, tracks?: Maybe<Array<Maybe<ResolversParentTypes['Track']>>> };
   Genre: Genre;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
-  JWT: Jwt;
   Member: Member;
   Query: {};
   String: Scalars['String'];
@@ -290,17 +297,22 @@ export type BandResolvers<ContextType = Context, ParentType extends ResolversPar
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type FavouritesResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Favourites'] = ResolversParentTypes['Favourites']> = {
+  artists?: Resolver<Maybe<Array<Maybe<ResolversTypes['Artist']>>>, ParentType, ContextType>;
+  bands?: Resolver<Maybe<Array<Maybe<ResolversTypes['Band']>>>, ParentType, ContextType>;
+  genres?: Resolver<Maybe<Array<Maybe<ResolversTypes['Genre']>>>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  tracks?: Resolver<Maybe<Array<Maybe<ResolversTypes['Track']>>>, ParentType, ContextType>;
+  userId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type GenreResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Genre'] = ResolversParentTypes['Genre']> = {
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type JwtResolvers<ContextType = Context, ParentType extends ResolversParentTypes['JWT'] = ResolversParentTypes['JWT']> = {
-  jwt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -321,9 +333,10 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
   artists?: Resolver<Array<ResolversTypes['Artist']>, ParentType, ContextType>;
   band?: Resolver<Maybe<ResolversTypes['Band']>, ParentType, ContextType, RequireFields<QueryBandArgs, 'id'>>;
   bands?: Resolver<Array<ResolversTypes['Band']>, ParentType, ContextType>;
+  favourites?: Resolver<Array<ResolversTypes['Favourites']>, ParentType, ContextType>;
   genre?: Resolver<Maybe<ResolversTypes['Genre']>, ParentType, ContextType, RequireFields<QueryGenreArgs, 'id'>>;
   genres?: Resolver<Array<ResolversTypes['Genre']>, ParentType, ContextType>;
-  jwt?: Resolver<Maybe<ResolversTypes['JWT']>, ParentType, ContextType, RequireFields<QueryJwtArgs, 'email' | 'password'>>;
+  jwt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<QueryJwtArgs, 'email' | 'password'>>;
   track?: Resolver<Maybe<ResolversTypes['Track']>, ParentType, ContextType, RequireFields<QueryTrackArgs, 'id'>>;
   tracks?: Resolver<Array<ResolversTypes['Track']>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
@@ -354,8 +367,8 @@ export type Resolvers<ContextType = Context> = {
   Album?: AlbumResolvers<ContextType>;
   Artist?: ArtistResolvers<ContextType>;
   Band?: BandResolvers<ContextType>;
+  Favourites?: FavouritesResolvers<ContextType>;
   Genre?: GenreResolvers<ContextType>;
-  JWT?: JwtResolvers<ContextType>;
   Member?: MemberResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Track?: TrackResolvers<ContextType>;

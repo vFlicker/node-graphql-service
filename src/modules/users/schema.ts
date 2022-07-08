@@ -2,7 +2,7 @@ import { gql } from 'apollo-server'
 
 export const typeDefs = gql`
     type Query {
-        jwt(email: String!, password: String!): JWT
+        jwt(email: String!, password: String!): String
         user(id: ID!): User
     }
 
@@ -12,9 +12,5 @@ export const typeDefs = gql`
         lastName: String
         password: String
         email: String!
-    }
-
-    type JWT {
-        jwt: String
     }
 `
