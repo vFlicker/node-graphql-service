@@ -66,6 +66,11 @@ export type Genre = {
   year?: Maybe<Scalars['Int']>;
 };
 
+export type Jwt = {
+  __typename?: 'JWT';
+  jwt?: Maybe<Scalars['String']>;
+};
+
 export type Member = {
   __typename?: 'Member';
   firstName?: Maybe<Scalars['String']>;
@@ -86,8 +91,10 @@ export type Query = {
   bands: Array<Band>;
   genre?: Maybe<Genre>;
   genres: Array<Genre>;
+  jwt?: Maybe<Jwt>;
   track?: Maybe<Track>;
   tracks: Array<Track>;
+  user?: Maybe<User>;
 };
 
 
@@ -111,7 +118,18 @@ export type QueryGenreArgs = {
 };
 
 
+export type QueryJwtArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+
 export type QueryTrackArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryUserArgs = {
   id: Scalars['ID'];
 };
 
@@ -125,6 +143,15 @@ export type Track = {
   id: Scalars['ID'];
   released?: Maybe<Scalars['Int']>;
   title: Scalars['String'];
+};
+
+export type User = {
+  __typename?: 'User';
+  email: Scalars['String'];
+  firstName?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  lastName?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
 };
 
 
@@ -203,10 +230,12 @@ export type ResolversTypes = {
   Genre: ResolverTypeWrapper<Genre>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  JWT: ResolverTypeWrapper<Jwt>;
   Member: ResolverTypeWrapper<Member>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Track: ResolverTypeWrapper<Track>;
+  User: ResolverTypeWrapper<User>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -218,10 +247,12 @@ export type ResolversParentTypes = {
   Genre: Genre;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
+  JWT: Jwt;
   Member: Member;
   Query: {};
   String: Scalars['String'];
   Track: Track;
+  User: User;
 };
 
 export type AlbumResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Album'] = ResolversParentTypes['Album']> = {
@@ -268,6 +299,11 @@ export type GenreResolvers<ContextType = Context, ParentType extends ResolversPa
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type JwtResolvers<ContextType = Context, ParentType extends ResolversParentTypes['JWT'] = ResolversParentTypes['JWT']> = {
+  jwt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MemberResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Member'] = ResolversParentTypes['Member']> = {
   firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -287,8 +323,10 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
   bands?: Resolver<Array<ResolversTypes['Band']>, ParentType, ContextType>;
   genre?: Resolver<Maybe<ResolversTypes['Genre']>, ParentType, ContextType, RequireFields<QueryGenreArgs, 'id'>>;
   genres?: Resolver<Array<ResolversTypes['Genre']>, ParentType, ContextType>;
+  jwt?: Resolver<Maybe<ResolversTypes['JWT']>, ParentType, ContextType, RequireFields<QueryJwtArgs, 'email' | 'password'>>;
   track?: Resolver<Maybe<ResolversTypes['Track']>, ParentType, ContextType, RequireFields<QueryTrackArgs, 'id'>>;
   tracks?: Resolver<Array<ResolversTypes['Track']>, ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
 };
 
 export type TrackResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Track'] = ResolversParentTypes['Track']> = {
@@ -303,13 +341,24 @@ export type TrackResolvers<ContextType = Context, ParentType extends ResolversPa
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  password?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = Context> = {
   Album?: AlbumResolvers<ContextType>;
   Artist?: ArtistResolvers<ContextType>;
   Band?: BandResolvers<ContextType>;
   Genre?: GenreResolvers<ContextType>;
+  JWT?: JwtResolvers<ContextType>;
   Member?: MemberResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Track?: TrackResolvers<ContextType>;
+  User?: UserResolvers<ContextType>;
 };
 
