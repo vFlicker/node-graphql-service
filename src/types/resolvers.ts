@@ -31,6 +31,7 @@ export type Album = {
   image?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   released?: Maybe<Scalars['Int']>;
+  tracks?: Maybe<Array<Maybe<Track>>>;
 };
 
 export type Artist = {
@@ -231,6 +232,7 @@ export type AlbumResolvers<ContextType = Context, ParentType extends ResolversPa
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   released?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  tracks?: Resolver<Maybe<Array<Maybe<ResolversTypes['Track']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

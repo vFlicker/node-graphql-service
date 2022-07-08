@@ -20,5 +20,8 @@ export const resolvers: Resolvers = {
         genres: ({ genresIds }, _, { dataSources }) => {
             return dataSources.genresService.getItemsByIds(genresIds)
         },
+        tracks: ({ trackIds }, _, { dataSources }) => {
+            return dataSources.tracksService.getItemsByIds(trackIds)
+        },
     },
 }

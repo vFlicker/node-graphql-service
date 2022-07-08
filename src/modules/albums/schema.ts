@@ -12,7 +12,7 @@ export const typeDefs = gql`
         released: Int
         artists: [Artist]
         bands: [Band]
-        # tracks: [Track]
+        tracks: [Track]
         genres: [Genre]
         image: String
     }
