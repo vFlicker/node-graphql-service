@@ -11,5 +11,12 @@ export const resolvers: Resolvers = {
     },
     Band: {
         id: ({ _id }) => _id,
+        genres: ({ genresIds }, _, { dataSources }) => {
+            const bands = []
+            for (const genresId of genresIds) {
+                bands.push(dataSources.genresAPI.getGenreById(genresId))
+            }
+            return bands
+        },
     },
 }
