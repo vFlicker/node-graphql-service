@@ -1,8 +1,9 @@
+import { dotEnvConfig } from '../../config'
 import { Service } from '../service'
 import { Band } from './interfaces'
 
 export class BandsService extends Service<Band> {
     constructor() {
-        super(process.env.BANDS_API as string)
+        super(dotEnvConfig.BANDS_API)
     }
 }
