@@ -12,4 +12,10 @@ export class Service<T> extends RESTDataSource {
     }
 
     getItemById = (id: string): Promise<T> => this.get(`/${id}`)
+
+    getItemsByIds = (ids: string[]): Promise<T>[] => {
+        const item = []
+        for (const id of ids) item.push(this.getItemById(id))
+        return item
+    }
 }

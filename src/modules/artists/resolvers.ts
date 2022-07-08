@@ -1,4 +1,4 @@
-import { Resolvers } from '../../types/index'
+import { Resolvers } from '../../types'
 
 export const resolvers: Resolvers = {
     Query: {
@@ -12,11 +12,7 @@ export const resolvers: Resolvers = {
     Artist: {
         id: ({ _id }) => _id,
         bands: ({ bandsIds }, _, { dataSources }) => {
-            const bands = []
-            for (const bandsId of bandsIds) {
-                bands.push(dataSources.bandsService.getItemById(bandsId))
-            }
-            return bands
+            return dataSources.bandsService.getItemsByIds(bandsIds)
         },
     },
 }

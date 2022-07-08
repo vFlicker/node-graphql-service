@@ -1,4 +1,4 @@
-import { Resolvers } from '../../types/index'
+import { Resolvers } from '../../types'
 
 export const resolvers: Resolvers = {
     Query: {
@@ -12,25 +12,13 @@ export const resolvers: Resolvers = {
     Album: {
         id: ({ _id }) => _id,
         artists: ({ artistsIds }, _, { dataSources }) => {
-            const artists = []
-            for (const artistId of artistsIds) {
-                artists.push(dataSources.artistsService.getItemById(artistId))
-            }
-            return artists
+            return dataSources.artistsService.getItemsByIds(artistsIds)
         },
         bands: ({ bandsIds }, _, { dataSources }) => {
-            const bands = []
-            for (const artistId of bandsIds) {
-                bands.push(dataSources.bandsService.getItemById(artistId))
-            }
-            return bands
+            return dataSources.bandsService.getItemsByIds(bandsIds)
         },
         genres: ({ genresIds }, _, { dataSources }) => {
-            const genres = []
-            for (const artistId of genresIds) {
-                genres.push(dataSources.genresService.getItemById(artistId))
-            }
-            return genres
+            return dataSources.genresService.getItemsByIds(genresIds)
         },
     },
 }
