@@ -1,4 +1,4 @@
-interface Member {
+export interface Member {
     artistId: string
     instrument: string
     years: string[]
