@@ -35,6 +35,7 @@ export type Band = {
   __typename?: 'Band';
   genres?: Maybe<Array<Maybe<Genre>>>;
   id: Scalars['ID'];
+  members?: Maybe<Array<Maybe<Member>>>;
   name?: Maybe<Scalars['String']>;
   origin?: Maybe<Scalars['String']>;
   website?: Maybe<Scalars['String']>;
@@ -47,6 +48,22 @@ export type Genre = {
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
   year?: Maybe<Scalars['Int']>;
+};
+
+export type Member = {
+  __typename?: 'Member';
+  firstName?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  instrument?: Maybe<Scalars['String']>;
+  middleName?: Maybe<Scalars['String']>;
+  secondName?: Maybe<Scalars['String']>;
+  years?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type MemberInput = {
+  artist: Scalars['ID'];
+  instrument?: InputMaybe<Scalars['String']>;
+  years?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type Query = {
@@ -149,6 +166,8 @@ export type ResolversTypes = {
   Genre: ResolverTypeWrapper<Genre>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  Member: ResolverTypeWrapper<Member>;
+  MemberInput: MemberInput;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
 };
@@ -161,6 +180,8 @@ export type ResolversParentTypes = {
   Genre: Genre;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
+  Member: Member;
+  MemberInput: MemberInput;
   Query: {};
   String: Scalars['String'];
 };
@@ -181,6 +202,7 @@ export type ArtistResolvers<ContextType = Context, ParentType extends ResolversP
 export type BandResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Band'] = ResolversParentTypes['Band']> = {
   genres?: Resolver<Maybe<Array<Maybe<ResolversTypes['Genre']>>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  members?: Resolver<Maybe<Array<Maybe<ResolversTypes['Member']>>>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   origin?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   website?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -193,6 +215,16 @@ export type GenreResolvers<ContextType = Context, ParentType extends ResolversPa
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MemberResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Member'] = ResolversParentTypes['Member']> = {
+  firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  instrument?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  middleName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  secondName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  years?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -209,6 +241,7 @@ export type Resolvers<ContextType = Context> = {
   Artist?: ArtistResolvers<ContextType>;
   Band?: BandResolvers<ContextType>;
   Genre?: GenreResolvers<ContextType>;
+  Member?: MemberResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
 

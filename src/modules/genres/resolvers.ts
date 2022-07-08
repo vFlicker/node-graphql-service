@@ -3,10 +3,10 @@ import { Resolvers } from '../../types'
 export const resolvers: Resolvers = {
     Query: {
         genres: (_, __, { dataSources }) => {
-            return dataSources.genresAPI.getAllGenres()
+            return dataSources.genresService.getAllItems()
         },
         genre: (_, { id }, { dataSources }) => {
-            return dataSources.genresAPI.getGenreById(id)
+            return dataSources.genresService.getItemById(id)
         },
     },
     Genre: {

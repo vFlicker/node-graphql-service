@@ -1,17 +1,8 @@
-import { RESTDataSource } from 'apollo-datasource-rest'
-
+import { Service } from '../service'
 import { Band } from './interfaces'
 
-export class BandsAPI extends RESTDataSource {
+export class BandsService extends Service<Band> {
     constructor() {
-        super()
-        this.baseURL = process.env.BANDS_API
+        super(process.env.BANDS_API as string)
     }
-
-    getAllBands = async (): Promise<Band[]> => {
-        const { items } = await this.get('/')
-        return items
-    }
-
-    getBandById = (id: string): Promise<Band> => this.get(`/${id}`)
 }

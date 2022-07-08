@@ -3,10 +3,10 @@ import { Resolvers } from '../../types/index'
 export const resolvers: Resolvers = {
     Query: {
         bands: (_, __, { dataSources }) => {
-            return dataSources.bandsAPI.getAllBands()
+            return dataSources.bandsService.getAllItems()
         },
         band: (_, { id }, { dataSources }) => {
-            return dataSources.bandsAPI.getBandById(id)
+            return dataSources.bandsService.getItemById(id)
         },
     },
     Band: {
@@ -14,7 +14,7 @@ export const resolvers: Resolvers = {
         genres: ({ genresIds }, _, { dataSources }) => {
             const bands = []
             for (const genresId of genresIds) {
-                bands.push(dataSources.genresAPI.getGenreById(genresId))
+                bands.push(dataSources.genresService.getItemById(genresId))
             }
             return bands
         },
