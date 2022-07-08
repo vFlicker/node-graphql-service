@@ -7,6 +7,7 @@ import {
     ArtistsService,
     BandsService,
     GenresService,
+    TracksService,
 } from '../modules'
 
 const typesArray = loadFilesSync(
@@ -24,6 +25,7 @@ export const dataSources = () => ({
     artistsService: new ArtistsService(),
     bandsService: new BandsService(),
     genresService: new GenresService(),
+    tracksService: new TracksService(),
 })
 
 export const apolloServerConfig = {
