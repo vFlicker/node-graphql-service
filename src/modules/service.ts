@@ -24,4 +24,9 @@ export class Service<Response> extends RESTDataSource<Context> {
         for (const id of ids) item.push(this.getItemById(id))
         return item
     }
+
+    createItem = async <T extends object>(data: T): Promise<Response> => {
+        const response = await this.post('/', data)
+        return response
+    }
 }

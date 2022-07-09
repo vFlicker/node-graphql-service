@@ -9,6 +9,11 @@ export const resolvers: Resolvers = {
             return dataSources.artistsService.getItemById(id)
         },
     },
+    Mutation: {
+        createArtist: (_, { input }, { dataSources }) => {
+            return dataSources.artistsService.createItem(input)
+        },
+    },
     Artist: {
         id: ({ _id }) => _id,
         bands: ({ bandsIds }, _, { dataSources }) => {
