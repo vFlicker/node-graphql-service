@@ -7,7 +7,8 @@ export const typeDefs = gql`
     }
 
     type Mutation {
-        createBand(input: BandInput!): Band!
+        createBand(input: CreateBandInput!): Band!
+        updateBand(id: ID!, input: UpdateBandInput!): Band!
     }
 
     type Band {
@@ -28,17 +29,31 @@ export const typeDefs = gql`
         years: [String]
     }
 
-    input BandInput {
-        name: String!
-        origin: String
-        members: [MemberInput]
-        website: String
-        genresIds: [String]
-    }
-
-    input MemberInput {
+    input CreateMemberInput {
         artistId: ID!
         instrument: String
         years: [String]
+    }
+
+    input CreateBandInput {
+        name: String!
+        origin: String
+        members: [CreateMemberInput]
+        website: String
+        genresIds: [ID]
+    }
+
+    input UpdateMemberInput {
+        artistId: ID
+        instrument: String
+        years: [String]
+    }
+
+    input UpdateBandInput {
+        name: String
+        origin: String
+        members: [UpdateMemberInput]
+        website: String
+        genresIds: [ID]
     }
 `

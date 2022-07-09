@@ -35,6 +35,9 @@ export const resolvers: Resolvers = {
         createBand: (_, { input }, { dataSources }) => {
             return dataSources.bandsService.createItem(input)
         },
+        updateBand: (_, { id, input }, { dataSources }) => {
+            return dataSources.bandsService.updateItem(id, input)
+        },
     },
     Band: {
         id: ({ _id }) => _id,

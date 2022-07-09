@@ -7,7 +7,8 @@ export const typeDefs = gql`
     }
 
     type Mutation {
-        createAlbum(input: AlbumInput!): Album!
+        createAlbum(input: CreateAlbumInput!): Album!
+        updateAlbum(id: ID!, input: UpdateAlbumInput!): Album!
     }
 
     type Album {
@@ -21,13 +22,23 @@ export const typeDefs = gql`
         image: String
     }
 
-    input AlbumInput {
+    input CreateAlbumInput {
         name: String!
         released: Int
-        artistsIds: [String]
-        bandsIds: [String]
-        trackIds: [String]
-        genresIds: [String]
+        artistsIds: [ID]
+        bandsIds: [ID]
+        trackIds: [ID]
+        genresIds: [ID]
+        image: String
+    }
+
+    input UpdateAlbumInput {
+        name: String
+        released: Int
+        artistsIds: [ID]
+        bandsIds: [ID]
+        trackIds: [ID]
+        genresIds: [ID]
         image: String
     }
 `

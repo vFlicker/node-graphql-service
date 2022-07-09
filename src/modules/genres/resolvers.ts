@@ -13,6 +13,9 @@ export const resolvers: Resolvers = {
         createGenre: (_, { input }, { dataSources }) => {
             return dataSources.genresService.createItem(input)
         },
+        updateGenre: (_, { id, input }, { dataSources }) => {
+            return dataSources.genresService.updateItem(id, input)
+        },
     },
     Genre: {
         id: ({ _id }) => _id,

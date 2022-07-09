@@ -13,6 +13,9 @@ export const resolvers: Resolvers = {
         createTrack: (_, { input }, { dataSources }) => {
             return dataSources.tracksService.createItem(input)
         },
+        updateTrack: (_, { id, input }, { dataSources }) => {
+            return dataSources.tracksService.updateItem(id, input)
+        },
     },
     Track: {
         id: ({ _id }) => _id,

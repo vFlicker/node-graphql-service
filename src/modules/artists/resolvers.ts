@@ -13,6 +13,9 @@ export const resolvers: Resolvers = {
         createArtist: (_, { input }, { dataSources }) => {
             return dataSources.artistsService.createItem(input)
         },
+        updateArtist: (_, { id, input }, { dataSources }) => {
+            return dataSources.artistsService.updateItem(id, input)
+        },
     },
     Artist: {
         id: ({ _id }) => _id,
