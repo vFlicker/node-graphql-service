@@ -14,8 +14,5 @@ export class FavouritesService extends RESTDataSource<Context> {
         request.headers.set('Authorization', `Bearer ${this.context.token}`)
     }
 
-    getFavourites = async (): Promise<FavouritesResponse> => {
-        const result = await this.get('/')
-        return result
-    }
+    getFavourites = (): Promise<FavouritesResponse> => this.get('/')
 }
