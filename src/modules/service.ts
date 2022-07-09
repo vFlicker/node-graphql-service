@@ -1,9 +1,15 @@
-import { RESTDataSource } from 'apollo-datasource-rest'
+import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest'
 
-export class Service<T> extends RESTDataSource {
+import { Context } from '../types'
+
+export class Service<T> extends RESTDataSource<Context> {
     constructor(baseURL: string) {
         super()
         this.baseURL = baseURL
+    }
+
+    willSendRequest(request: RequestOptions) {
+        request.headers.set('Authorization', `Bearer ${this.context.token}`)
     }
 
     getAllItems = async (): Promise<T[]> => {

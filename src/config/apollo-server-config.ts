@@ -1,4 +1,8 @@
 import path from 'path'
+import {
+    ApolloServerExpressConfig,
+    ExpressContext,
+} from 'apollo-server-express'
 import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge'
 import { loadFilesSync } from '@graphql-tools/load-files'
 
@@ -32,8 +36,14 @@ export const dataSources = () => ({
     usersService: new UsersService(),
 })
 
-export const apolloServerConfig = {
+const context = ({ req }: ExpressContext) => {
+    const token = (req.headers && req.headers.authorization) || ''
+    return { token }
+}
+
+export const apolloServerConfig: ApolloServerExpressConfig = {
     typeDefs,
     resolvers,
     dataSources,
+    context,
 }
