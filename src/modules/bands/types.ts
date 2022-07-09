@@ -1,10 +1,10 @@
-export interface Member {
+export type Member = {
     artistId: string
     instrument: string
     years: string[]
 }
 
-export interface Band {
+export type BandResponse = {
     _id: string
     name: string
     origin: string

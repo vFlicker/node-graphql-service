@@ -1,4 +1,4 @@
-export interface Artist {
+export type ArtistResponse = {
     _id: string
     firstName: string
     secondName: string

@@ -1,4 +1,4 @@
-export interface Album {
+export type AlbumResponse = {
     _id: string
     name: string
     released: number

@@ -1,8 +1,8 @@
 import { dotEnvConfig } from '../../config'
 import { Service } from '../service'
-import { Track } from './interfaces'
+import { TrackResponse } from './types'
 
-export class TracksService extends Service<Track> {
+export class TracksService extends Service<TrackResponse> {
     constructor() {
         super(dotEnvConfig.TRACKS_API)
     }

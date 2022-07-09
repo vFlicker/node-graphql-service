@@ -1,4 +1,4 @@
-export interface Favourites {
+export type FavouritesResponse = {
     _id: string
     userId: string
     bandsIds: string[]

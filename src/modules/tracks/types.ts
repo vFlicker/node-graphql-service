@@ -1,4 +1,4 @@
-export interface Track {
+export type TrackResponse = {
     _id: string
     title: string
     albumId: string

@@ -1,8 +1,8 @@
 import { dotEnvConfig } from '../../config'
 import { Service } from '../service'
-import { Band } from './interfaces'
+import { BandResponse } from './types'
 
-export class BandsService extends Service<Band> {
+export class BandsService extends Service<BandResponse> {
     constructor() {
         super(dotEnvConfig.BANDS_API)
     }

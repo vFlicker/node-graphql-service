@@ -2,7 +2,7 @@ import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest'
 
 import { dotEnvConfig } from '../../config'
 import { Context } from '../../types'
-import { User } from './interfaces'
+import { UserResponse } from './types'
 
 type JWT = {
     jwt: string
@@ -28,5 +28,5 @@ export class UsersService extends RESTDataSource<Context> {
         return response.jwt
     }
 
-    getUserById = (id: string): Promise<User> => this.get(`/${id}`)
+    getUserById = (id: string): Promise<UserResponse> => this.get(`/${id}`)
 }

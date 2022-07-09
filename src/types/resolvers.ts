@@ -1,11 +1,11 @@
 import { GraphQLResolveInfo } from 'graphql';
-import { Album } from '../modules/albums/interfaces';
-import { Artist } from '../modules/artists/interfaces';
-import { Band } from '../modules/bands/interfaces';
-import { Favourites } from '../modules/favourites/interfaces';
-import { Genre } from '../modules/genres/interfaces';
-import { Track } from '../modules/tracks/interfaces';
-import { User } from '../modules/users/interfaces';
+import { AlbumResponse } from '../modules/albums';
+import { ArtistResponse } from '../modules/artists';
+import { BandResponse } from '../modules/bands';
+import { FavouritesResponse } from '../modules/favourites';
+import { GenreResponse } from '../modules/genres';
+import { TrackResponse } from '../modules/tracks';
+import { UserResponse } from '../modules/users';
 import { Context } from './context';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -229,36 +229,36 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Album: ResolverTypeWrapper<Album>;
-  Artist: ResolverTypeWrapper<Artist>;
-  Band: ResolverTypeWrapper<Band>;
+  Album: ResolverTypeWrapper<AlbumResponse>;
+  Artist: ResolverTypeWrapper<ArtistResponse>;
+  Band: ResolverTypeWrapper<BandResponse>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-  Favourites: ResolverTypeWrapper<Favourites>;
-  Genre: ResolverTypeWrapper<Genre>;
+  Favourites: ResolverTypeWrapper<FavouritesResponse>;
+  Genre: ResolverTypeWrapper<GenreResponse>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Member: ResolverTypeWrapper<Member>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
-  Track: ResolverTypeWrapper<Track>;
-  User: ResolverTypeWrapper<User>;
+  Track: ResolverTypeWrapper<TrackResponse>;
+  User: ResolverTypeWrapper<UserResponse>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Album: Album;
-  Artist: Artist;
-  Band: Band;
+  Album: AlbumResponse;
+  Artist: ArtistResponse;
+  Band: BandResponse;
   Boolean: Scalars['Boolean'];
-  Favourites: Favourites;
-  Genre: Genre;
+  Favourites: FavouritesResponse;
+  Genre: GenreResponse;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
   Member: Member;
   Query: {};
   String: Scalars['String'];
-  Track: Track;
-  User: User;
+  Track: TrackResponse;
+  User: UserResponse;
 };
 
 export type AlbumResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Album'] = ResolversParentTypes['Album']> = {

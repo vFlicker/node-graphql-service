@@ -2,7 +2,7 @@ import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest'
 
 import { dotEnvConfig } from '../../config'
 import { Context } from '../../types'
-import { Favourites } from './interfaces'
+import { FavouritesResponse } from './types'
 
 export class FavouritesService extends RESTDataSource<Context> {
     constructor() {
@@ -14,7 +14,7 @@ export class FavouritesService extends RESTDataSource<Context> {
         request.headers.set('Authorization', `Bearer ${this.context.token}`)
     }
 
-    getFavourites = async (): Promise<Favourites> => {
+    getFavourites = async (): Promise<FavouritesResponse> => {
         const result = await this.get('/')
         return result
     }

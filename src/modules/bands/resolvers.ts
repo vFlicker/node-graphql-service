@@ -1,6 +1,6 @@
 import { Resolvers } from '../../types'
 import { ArtistsService } from '../artists'
-import { Member } from './interfaces'
+import { Member } from './types'
 
 const getMembersByIds = async (
     members: Member[],
