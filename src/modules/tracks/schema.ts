@@ -6,6 +6,10 @@ export const typeDefs = gql`
         track(id: ID!): Track
     }
 
+    type Mutation {
+        createTrack(input: TrackInput!): Track!
+    }
+
     type Track {
         id: ID!
         title: String!
@@ -15,5 +19,15 @@ export const typeDefs = gql`
         duration: Int
         released: Int
         genres: [Genre]
+    }
+
+    input TrackInput {
+        title: String!
+        albumId: String
+        artistsIds: [String]
+        bandsIds: [String]
+        duration: Int
+        released: Int
+        genresIds: [String]
     }
 `

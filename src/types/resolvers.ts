@@ -29,9 +29,19 @@ export type Album = {
   genres?: Maybe<Array<Maybe<Genre>>>;
   id: Scalars['ID'];
   image?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   released?: Maybe<Scalars['Int']>;
   tracks?: Maybe<Array<Maybe<Track>>>;
+};
+
+export type AlbumInput = {
+  artistsIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  bandsIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  genresIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  image?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  released?: InputMaybe<Scalars['Int']>;
+  trackIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type Artist = {
@@ -63,9 +73,17 @@ export type Band = {
   genres?: Maybe<Array<Maybe<Genre>>>;
   id: Scalars['ID'];
   members?: Maybe<Array<Maybe<Member>>>;
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   origin?: Maybe<Scalars['String']>;
   website?: Maybe<Scalars['String']>;
+};
+
+export type BandInput = {
+  genresIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  members?: InputMaybe<Array<InputMaybe<Member>>>;
+  name: Scalars['String'];
+  origin?: InputMaybe<Scalars['String']>;
+  website?: InputMaybe<Scalars['String']>;
 };
 
 export type Favourites = {
@@ -83,8 +101,15 @@ export type Genre = {
   country?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   year?: Maybe<Scalars['Int']>;
+};
+
+export type GenreInput = {
+  country?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  year?: InputMaybe<Scalars['Int']>;
 };
 
 export type Member = {
@@ -99,12 +124,36 @@ export type Member = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createAlbum: Album;
   createArtist: Artist;
+  createBand: Band;
+  createGenre: Genre;
+  createTrack: Track;
+};
+
+
+export type MutationCreateAlbumArgs = {
+  input: AlbumInput;
 };
 
 
 export type MutationCreateArtistArgs = {
   input: ArtistInput;
+};
+
+
+export type MutationCreateBandArgs = {
+  input: BandInput;
+};
+
+
+export type MutationCreateGenreArgs = {
+  input: GenreInput;
+};
+
+
+export type MutationCreateTrackArgs = {
+  input: TrackInput;
 };
 
 export type Query = {
@@ -169,6 +218,16 @@ export type Track = {
   genres?: Maybe<Array<Maybe<Genre>>>;
   id: Scalars['ID'];
   released?: Maybe<Scalars['Int']>;
+  title: Scalars['String'];
+};
+
+export type TrackInput = {
+  albumId?: InputMaybe<Scalars['String']>;
+  artistsIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  bandsIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  duration?: InputMaybe<Scalars['Int']>;
+  genresIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  released?: InputMaybe<Scalars['Int']>;
   title: Scalars['String'];
 };
 
@@ -251,12 +310,15 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Album: ResolverTypeWrapper<AlbumResponse>;
+  AlbumInput: AlbumInput;
   Artist: ResolverTypeWrapper<ArtistResponse>;
   ArtistInput: ArtistInput;
   Band: ResolverTypeWrapper<BandResponse>;
+  BandInput: BandInput;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Favourites: ResolverTypeWrapper<FavouritesResponse>;
   Genre: ResolverTypeWrapper<GenreResponse>;
+  GenreInput: GenreInput;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Member: ResolverTypeWrapper<Member>;
@@ -264,18 +326,22 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Track: ResolverTypeWrapper<TrackResponse>;
+  TrackInput: TrackInput;
   User: ResolverTypeWrapper<UserResponse>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Album: AlbumResponse;
+  AlbumInput: AlbumInput;
   Artist: ArtistResponse;
   ArtistInput: ArtistInput;
   Band: BandResponse;
+  BandInput: BandInput;
   Boolean: Scalars['Boolean'];
   Favourites: FavouritesResponse;
   Genre: GenreResponse;
+  GenreInput: GenreInput;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
   Member: Member;
@@ -283,6 +349,7 @@ export type ResolversParentTypes = {
   Query: {};
   String: Scalars['String'];
   Track: TrackResponse;
+  TrackInput: TrackInput;
   User: UserResponse;
 };
 
@@ -292,7 +359,7 @@ export type AlbumResolvers<ContextType = Context, ParentType extends ResolversPa
   genres?: Resolver<Maybe<Array<Maybe<ResolversTypes['Genre']>>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   released?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   tracks?: Resolver<Maybe<Array<Maybe<ResolversTypes['Track']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -315,7 +382,7 @@ export type BandResolvers<ContextType = Context, ParentType extends ResolversPar
   genres?: Resolver<Maybe<Array<Maybe<ResolversTypes['Genre']>>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   members?: Resolver<Maybe<Array<Maybe<ResolversTypes['Member']>>>, ParentType, ContextType>;
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   origin?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   website?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -335,7 +402,7 @@ export type GenreResolvers<ContextType = Context, ParentType extends ResolversPa
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -351,7 +418,11 @@ export type MemberResolvers<ContextType = Context, ParentType extends ResolversP
 };
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createAlbum?: Resolver<ResolversTypes['Album'], ParentType, ContextType, RequireFields<MutationCreateAlbumArgs, 'input'>>;
   createArtist?: Resolver<ResolversTypes['Artist'], ParentType, ContextType, RequireFields<MutationCreateArtistArgs, 'input'>>;
+  createBand?: Resolver<ResolversTypes['Band'], ParentType, ContextType, RequireFields<MutationCreateBandArgs, 'input'>>;
+  createGenre?: Resolver<ResolversTypes['Genre'], ParentType, ContextType, RequireFields<MutationCreateGenreArgs, 'input'>>;
+  createTrack?: Resolver<ResolversTypes['Track'], ParentType, ContextType, RequireFields<MutationCreateTrackArgs, 'input'>>;
 };
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {

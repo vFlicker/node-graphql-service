@@ -6,9 +6,13 @@ export const typeDefs = gql`
         band(id: ID!): Band
     }
 
+    type Mutation {
+        createBand(input: BandInput!): Band!
+    }
+
     type Band {
         id: ID!
-        name: String
+        name: String!
         origin: String
         members: [Member]
         website: String
@@ -20,6 +24,20 @@ export const typeDefs = gql`
         firstName: String
         secondName: String
         middleName: String
+        instrument: String
+        years: [String]
+    }
+
+    input BandInput {
+        name: String!
+        origin: String
+        members: [MemberInput]
+        website: String
+        genresIds: [String]
+    }
+
+    input MemberInput {
+        artistId: ID!
         instrument: String
         years: [String]
     }

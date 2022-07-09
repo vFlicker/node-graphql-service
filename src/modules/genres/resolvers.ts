@@ -9,6 +9,11 @@ export const resolvers: Resolvers = {
             return dataSources.genresService.getItemById(id)
         },
     },
+    Mutation: {
+        createGenre: (_, { input }, { dataSources }) => {
+            return dataSources.genresService.createItem(input)
+        },
+    },
     Genre: {
         id: ({ _id }) => _id,
     },
