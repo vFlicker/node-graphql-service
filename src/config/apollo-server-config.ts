@@ -7,6 +7,7 @@ import {
     ArtistsService,
     BandsService,
     GenresService,
+    FavouritesService,
     TracksService,
     UsersService,
 } from '../modules'
@@ -26,6 +27,7 @@ export const dataSources = () => ({
     artistsService: new ArtistsService(),
     bandsService: new BandsService(),
     genresService: new GenresService(),
+    favouritesService: new FavouritesService(),
     tracksService: new TracksService(),
     usersService: new UsersService(),
 })

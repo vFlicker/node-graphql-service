@@ -7,7 +7,7 @@ generates:
                 Album: '../modules/albums/interfaces#Album'
                 Artist: '../modules/artists/interfaces#Artist'
                 Band: '../modules/bands/interfaces#Band'
-                Favorite: '../modules/favorites/interfaces#Favorite'
+                Favourites: '../modules/favourites/interfaces#Favourites'
                 Genre: '../modules/genres/interfaces#Genre'
                 Track: '../modules/tracks/interfaces#Track'
                 User: '../modules/users/interfaces#User'

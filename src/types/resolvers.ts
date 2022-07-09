@@ -2,7 +2,7 @@ import { GraphQLResolveInfo } from 'graphql';
 import { Album } from '../modules/albums/interfaces';
 import { Artist } from '../modules/artists/interfaces';
 import { Band } from '../modules/bands/interfaces';
-import { Favorite } from '../modules/favorites/interfaces';
+import { Favourites } from '../modules/favourites/interfaces';
 import { Genre } from '../modules/genres/interfaces';
 import { Track } from '../modules/tracks/interfaces';
 import { User } from '../modules/users/interfaces';
@@ -12,7 +12,6 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -95,7 +94,7 @@ export type Query = {
   artists: Array<Artist>;
   band?: Maybe<Band>;
   bands: Array<Band>;
-  favourites: Array<Favourites>;
+  favourites?: Maybe<Favourites>;
   genre?: Maybe<Genre>;
   genres: Array<Genre>;
   jwt?: Maybe<Scalars['String']>;
@@ -234,7 +233,7 @@ export type ResolversTypes = {
   Artist: ResolverTypeWrapper<Artist>;
   Band: ResolverTypeWrapper<Band>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-  Favourites: ResolverTypeWrapper<Omit<Favourites, 'artists' | 'bands' | 'genres' | 'tracks'> & { artists?: Maybe<Array<Maybe<ResolversTypes['Artist']>>>, bands?: Maybe<Array<Maybe<ResolversTypes['Band']>>>, genres?: Maybe<Array<Maybe<ResolversTypes['Genre']>>>, tracks?: Maybe<Array<Maybe<ResolversTypes['Track']>>> }>;
+  Favourites: ResolverTypeWrapper<Favourites>;
   Genre: ResolverTypeWrapper<Genre>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -251,7 +250,7 @@ export type ResolversParentTypes = {
   Artist: Artist;
   Band: Band;
   Boolean: Scalars['Boolean'];
-  Favourites: Omit<Favourites, 'artists' | 'bands' | 'genres' | 'tracks'> & { artists?: Maybe<Array<Maybe<ResolversParentTypes['Artist']>>>, bands?: Maybe<Array<Maybe<ResolversParentTypes['Band']>>>, genres?: Maybe<Array<Maybe<ResolversParentTypes['Genre']>>>, tracks?: Maybe<Array<Maybe<ResolversParentTypes['Track']>>> };
+  Favourites: Favourites;
   Genre: Genre;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
@@ -333,7 +332,7 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
   artists?: Resolver<Array<ResolversTypes['Artist']>, ParentType, ContextType>;
   band?: Resolver<Maybe<ResolversTypes['Band']>, ParentType, ContextType, RequireFields<QueryBandArgs, 'id'>>;
   bands?: Resolver<Array<ResolversTypes['Band']>, ParentType, ContextType>;
-  favourites?: Resolver<Array<ResolversTypes['Favourites']>, ParentType, ContextType>;
+  favourites?: Resolver<Maybe<ResolversTypes['Favourites']>, ParentType, ContextType>;
   genre?: Resolver<Maybe<ResolversTypes['Genre']>, ParentType, ContextType, RequireFields<QueryGenreArgs, 'id'>>;
   genres?: Resolver<Array<ResolversTypes['Genre']>, ParentType, ContextType>;
   jwt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<QueryJwtArgs, 'email' | 'password'>>;
