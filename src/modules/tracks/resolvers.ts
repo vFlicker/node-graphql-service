@@ -16,6 +16,9 @@ export const resolvers: Resolvers = {
         updateTrack: (_, { id, input }, { dataSources }) => {
             return dataSources.tracksService.updateItem(id, input)
         },
+        deleteTrack: (_, { id }, { dataSources }) => {
+            return dataSources.tracksService.deleteItem(id)
+        },
     },
     Track: {
         id: ({ _id }) => _id,

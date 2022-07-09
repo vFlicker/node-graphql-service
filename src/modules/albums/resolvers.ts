@@ -16,6 +16,9 @@ export const resolvers: Resolvers = {
         updateAlbum: (_, { id, input }, { dataSources }) => {
             return dataSources.albumsService.updateItem(id, input)
         },
+        deleteAlbum: (_, { id }, { dataSources }) => {
+            return dataSources.albumsService.deleteItem(id)
+        },
     },
     Album: {
         id: ({ _id }) => _id,

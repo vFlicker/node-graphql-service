@@ -38,6 +38,9 @@ export const resolvers: Resolvers = {
         updateBand: (_, { id, input }, { dataSources }) => {
             return dataSources.bandsService.updateItem(id, input)
         },
+        deleteBand: (_, { id }, { dataSources }) => {
+            return dataSources.bandsService.deleteItem(id)
+        },
     },
     Band: {
         id: ({ _id }) => _id,

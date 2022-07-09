@@ -9,6 +9,7 @@ export const typeDefs = gql`
     type Mutation {
         createGenre(input: CreateGenreInput!): Genre!
         updateGenre(id: ID!, input: UpdateGenreInput!): Genre!
+        deleteGenre(id: ID!): DeleteResponse!
     }
 
     type Genre {

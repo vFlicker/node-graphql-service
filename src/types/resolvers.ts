@@ -101,12 +101,18 @@ export type CreateMemberInput = {
 
 export type CreateTrackInput = {
   albumId?: InputMaybe<Scalars['String']>;
-  artistsIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  bandsIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  artistsIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  bandsIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   duration?: InputMaybe<Scalars['Int']>;
-  genresIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  genresIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   released?: InputMaybe<Scalars['Int']>;
   title: Scalars['String'];
+};
+
+export type DeleteResponse = {
+  __typename?: 'DeleteResponse';
+  acknowledged?: Maybe<Scalars['Boolean']>;
+  deletedCount?: Maybe<Scalars['Int']>;
 };
 
 export type Favourites = {
@@ -145,9 +151,14 @@ export type Mutation = {
   createBand: Band;
   createGenre: Genre;
   createTrack: Track;
+  deleteAlbum: DeleteResponse;
+  deleteArtist: DeleteResponse;
+  deleteBand: DeleteResponse;
+  deleteGenre: DeleteResponse;
+  deleteTrack: DeleteResponse;
   updateAlbum: Album;
   updateArtist: Artist;
-  updateBand?: Maybe<Band>;
+  updateBand: Band;
   updateGenre: Genre;
   updateTrack: Track;
 };
@@ -175,6 +186,31 @@ export type MutationCreateGenreArgs = {
 
 export type MutationCreateTrackArgs = {
   input: CreateTrackInput;
+};
+
+
+export type MutationDeleteAlbumArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteArtistArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteBandArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteGenreArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteTrackArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -316,10 +352,10 @@ export type UpdateMemberInput = {
 
 export type UpdateTrackInput = {
   albumId?: InputMaybe<Scalars['String']>;
-  artistsIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  bandsIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  artistsIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  bandsIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   duration?: InputMaybe<Scalars['Int']>;
-  genresIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  genresIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   released?: InputMaybe<Scalars['Int']>;
   title?: InputMaybe<Scalars['String']>;
 };
@@ -412,6 +448,7 @@ export type ResolversTypes = {
   CreateGenreInput: CreateGenreInput;
   CreateMemberInput: CreateMemberInput;
   CreateTrackInput: CreateTrackInput;
+  DeleteResponse: ResolverTypeWrapper<DeleteResponse>;
   Favourites: ResolverTypeWrapper<FavouritesResponse>;
   Genre: ResolverTypeWrapper<GenreResponse>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
@@ -442,6 +479,7 @@ export type ResolversParentTypes = {
   CreateGenreInput: CreateGenreInput;
   CreateMemberInput: CreateMemberInput;
   CreateTrackInput: CreateTrackInput;
+  DeleteResponse: DeleteResponse;
   Favourites: FavouritesResponse;
   Genre: GenreResponse;
   ID: Scalars['ID'];
@@ -495,6 +533,12 @@ export type BandResolvers<ContextType = Context, ParentType extends ResolversPar
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type DeleteResponseResolvers<ContextType = Context, ParentType extends ResolversParentTypes['DeleteResponse'] = ResolversParentTypes['DeleteResponse']> = {
+  acknowledged?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  deletedCount?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type FavouritesResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Favourites'] = ResolversParentTypes['Favourites']> = {
   artists?: Resolver<Maybe<Array<Maybe<ResolversTypes['Artist']>>>, ParentType, ContextType>;
   bands?: Resolver<Maybe<Array<Maybe<ResolversTypes['Band']>>>, ParentType, ContextType>;
@@ -530,9 +574,14 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   createBand?: Resolver<ResolversTypes['Band'], ParentType, ContextType, RequireFields<MutationCreateBandArgs, 'input'>>;
   createGenre?: Resolver<ResolversTypes['Genre'], ParentType, ContextType, RequireFields<MutationCreateGenreArgs, 'input'>>;
   createTrack?: Resolver<ResolversTypes['Track'], ParentType, ContextType, RequireFields<MutationCreateTrackArgs, 'input'>>;
+  deleteAlbum?: Resolver<ResolversTypes['DeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteAlbumArgs, 'id'>>;
+  deleteArtist?: Resolver<ResolversTypes['DeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteArtistArgs, 'id'>>;
+  deleteBand?: Resolver<ResolversTypes['DeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteBandArgs, 'id'>>;
+  deleteGenre?: Resolver<ResolversTypes['DeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteGenreArgs, 'id'>>;
+  deleteTrack?: Resolver<ResolversTypes['DeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteTrackArgs, 'id'>>;
   updateAlbum?: Resolver<ResolversTypes['Album'], ParentType, ContextType, RequireFields<MutationUpdateAlbumArgs, 'id' | 'input'>>;
   updateArtist?: Resolver<ResolversTypes['Artist'], ParentType, ContextType, RequireFields<MutationUpdateArtistArgs, 'id' | 'input'>>;
-  updateBand?: Resolver<Maybe<ResolversTypes['Band']>, ParentType, ContextType, RequireFields<MutationUpdateBandArgs, 'id' | 'input'>>;
+  updateBand?: Resolver<ResolversTypes['Band'], ParentType, ContextType, RequireFields<MutationUpdateBandArgs, 'id' | 'input'>>;
   updateGenre?: Resolver<ResolversTypes['Genre'], ParentType, ContextType, RequireFields<MutationUpdateGenreArgs, 'id' | 'input'>>;
   updateTrack?: Resolver<ResolversTypes['Track'], ParentType, ContextType, RequireFields<MutationUpdateTrackArgs, 'id' | 'input'>>;
 };
@@ -578,6 +627,7 @@ export type Resolvers<ContextType = Context> = {
   Album?: AlbumResolvers<ContextType>;
   Artist?: ArtistResolvers<ContextType>;
   Band?: BandResolvers<ContextType>;
+  DeleteResponse?: DeleteResponseResolvers<ContextType>;
   Favourites?: FavouritesResolvers<ContextType>;
   Genre?: GenreResolvers<ContextType>;
   Member?: MemberResolvers<ContextType>;

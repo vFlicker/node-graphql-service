@@ -9,6 +9,7 @@ export const typeDefs = gql`
     type Mutation {
         createBand(input: CreateBandInput!): Band!
         updateBand(id: ID!, input: UpdateBandInput!): Band!
+        deleteBand(id: ID!): DeleteResponse!
     }
 
     type Band {
