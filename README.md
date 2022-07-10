@@ -1,5 +1,27 @@
-## GraphQL Basics
+## GraphQL Service
 
-1. [Link to task](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/graphql-service/assignment.md)
-2. Deadline date: 2022-07-10 23:59
-3. Max score: 160
+### Downloading
+
+```
+git clone {repository URL}
+```
+
+### Installing
+
+```
+npm install
+```
+
+### Running application
+
+Rename .env.example to .env
+
+To run services:
+```
+npm start
+```
+
+To build the application:
+```
+npm run build
+```
