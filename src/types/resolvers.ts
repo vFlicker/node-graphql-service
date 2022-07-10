@@ -303,8 +303,20 @@ export type QueryAlbumArgs = {
 };
 
 
+export type QueryAlbumsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+};
+
+
 export type QueryArtistArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryArtistsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -313,8 +325,20 @@ export type QueryBandArgs = {
 };
 
 
+export type QueryBandsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+};
+
+
 export type QueryGenreArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryGenresArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -326,6 +350,12 @@ export type QueryJwtArgs = {
 
 export type QueryTrackArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryTracksArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -632,17 +662,17 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   album?: Resolver<Maybe<ResolversTypes['Album']>, ParentType, ContextType, RequireFields<QueryAlbumArgs, 'id'>>;
-  albums?: Resolver<Array<ResolversTypes['Album']>, ParentType, ContextType>;
+  albums?: Resolver<Array<ResolversTypes['Album']>, ParentType, ContextType, Partial<QueryAlbumsArgs>>;
   artist?: Resolver<ResolversTypes['Artist'], ParentType, ContextType, RequireFields<QueryArtistArgs, 'id'>>;
-  artists?: Resolver<Array<ResolversTypes['Artist']>, ParentType, ContextType>;
+  artists?: Resolver<Array<ResolversTypes['Artist']>, ParentType, ContextType, Partial<QueryArtistsArgs>>;
   band?: Resolver<Maybe<ResolversTypes['Band']>, ParentType, ContextType, RequireFields<QueryBandArgs, 'id'>>;
-  bands?: Resolver<Array<ResolversTypes['Band']>, ParentType, ContextType>;
+  bands?: Resolver<Array<ResolversTypes['Band']>, ParentType, ContextType, Partial<QueryBandsArgs>>;
   favourites?: Resolver<Maybe<ResolversTypes['Favourites']>, ParentType, ContextType>;
   genre?: Resolver<Maybe<ResolversTypes['Genre']>, ParentType, ContextType, RequireFields<QueryGenreArgs, 'id'>>;
-  genres?: Resolver<Array<ResolversTypes['Genre']>, ParentType, ContextType>;
+  genres?: Resolver<Array<ResolversTypes['Genre']>, ParentType, ContextType, Partial<QueryGenresArgs>>;
   jwt?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<QueryJwtArgs, 'email' | 'password'>>;
   track?: Resolver<Maybe<ResolversTypes['Track']>, ParentType, ContextType, RequireFields<QueryTrackArgs, 'id'>>;
-  tracks?: Resolver<Array<ResolversTypes['Track']>, ParentType, ContextType>;
+  tracks?: Resolver<Array<ResolversTypes['Track']>, ParentType, ContextType, Partial<QueryTracksArgs>>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
 };
 

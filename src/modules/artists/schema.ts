@@ -2,7 +2,7 @@ import { gql } from 'apollo-server'
 
 export const typeDefs = gql`
     type Query {
-        artists: [Artist!]!
+        artists(offset: Int, limit: Int): [Artist!]!
         artist(id: ID!): Artist!
     }
 

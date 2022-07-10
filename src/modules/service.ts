@@ -2,6 +2,11 @@ import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest'
 
 import { Context, Id, DeleteResponse } from '../types'
 
+const enum Pagination {
+    Offset = 0,
+    Limit = 5,
+}
+
 export class Service<ItemResponse> extends RESTDataSource<Context> {
     constructor(baseURL: string) {
         super()
@@ -14,8 +19,11 @@ export class Service<ItemResponse> extends RESTDataSource<Context> {
 
     getItemById = (id: string): Promise<ItemResponse> => this.get(`/${id}`)
 
-    getAllItems = async (): Promise<ItemResponse[]> => {
-        const { items } = await this.get('/')
+    getAllItems = async (
+        offset = Pagination.Offset,
+        limit = Pagination.Limit,
+    ): Promise<ItemResponse[]> => {
+        const { items } = await this.get('/', { offset, limit })
         return items
     }
 

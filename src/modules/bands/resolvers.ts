@@ -1,4 +1,4 @@
-import { Resolvers } from '../../types'
+import { Pagination, Resolvers } from '../../types'
 import { ArtistsService } from '../artists'
 import { Member } from './types'
 
@@ -24,8 +24,8 @@ const getMembersByIds = async (
 
 export const resolvers: Resolvers = {
     Query: {
-        bands: (_, __, { dataSources }) => {
-            return dataSources.bandsService.getAllItems()
+        bands: (_, { offset, limit }: Pagination, { dataSources }) => {
+            return dataSources.bandsService.getAllItems(offset, limit)
         },
         band: (_, { id }, { dataSources }) => {
             return dataSources.bandsService.getItemById(id)

@@ -1,9 +1,9 @@
-import { Resolvers } from '../../types'
+import { Pagination, Resolvers } from '../../types'
 
 export const resolvers: Resolvers = {
     Query: {
-        artists: (_, __, { dataSources }) => {
-            return dataSources.artistsService.getAllItems()
+        artists: (_, { offset, limit }: Pagination, { dataSources }) => {
+            return dataSources.artistsService.getAllItems(offset, limit)
         },
         artist: (_, { id }, { dataSources }) => {
             return dataSources.artistsService.getItemById(id)

@@ -1,9 +1,9 @@
-import { Resolvers } from '../../types'
+import { Pagination, Resolvers } from '../../types'
 
 export const resolvers: Resolvers = {
     Query: {
-        genres: (_, __, { dataSources }) => {
-            return dataSources.genresService.getAllItems()
+        genres: (_, { offset, limit }: Pagination, { dataSources }) => {
+            return dataSources.genresService.getAllItems(offset, limit)
         },
         genre: (_, { id }, { dataSources }) => {
             return dataSources.genresService.getItemById(id)

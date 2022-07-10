@@ -2,7 +2,7 @@ import { gql } from 'apollo-server'
 
 export const typeDefs = gql`
     type Query {
-        tracks: [Track!]!
+        tracks(offset: Int, limit: Int): [Track!]!
         track(id: ID!): Track
     }
 
