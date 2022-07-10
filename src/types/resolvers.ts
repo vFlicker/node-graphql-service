@@ -104,13 +104,16 @@ export type CreateTrackInput = {
   artistsIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   bandsIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   duration?: InputMaybe<Scalars['Int']>;
-  email: Scalars['String'];
-  firstName: Scalars['String'];
   genresIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  lastName: Scalars['String'];
-  password: Scalars['String'];
   released?: InputMaybe<Scalars['Int']>;
   title: Scalars['String'];
+};
+
+export type CreateUserInput = {
+  email: Scalars['String'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type DeleteResponse = {
@@ -150,6 +153,10 @@ export type Member = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addArtistToFavourites?: Maybe<Favourites>;
+  addBandToFavourites?: Maybe<Favourites>;
+  addGenreToFavourites?: Maybe<Favourites>;
+  addTrackToFavourites?: Maybe<Favourites>;
   createAlbum: Album;
   createArtist: Artist;
   createBand: Band;
@@ -166,6 +173,26 @@ export type Mutation = {
   updateBand: Band;
   updateGenre: Genre;
   updateTrack: Track;
+};
+
+
+export type MutationAddArtistToFavouritesArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationAddBandToFavouritesArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationAddGenreToFavouritesArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationAddTrackToFavouritesArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -220,7 +247,7 @@ export type MutationDeleteTrackArgs = {
 
 
 export type MutationRegisterArgs = {
-  input: CreateTrackInput;
+  input: CreateUserInput;
 };
 
 
@@ -458,6 +485,7 @@ export type ResolversTypes = {
   CreateGenreInput: CreateGenreInput;
   CreateMemberInput: CreateMemberInput;
   CreateTrackInput: CreateTrackInput;
+  CreateUserInput: CreateUserInput;
   DeleteResponse: ResolverTypeWrapper<DeleteResponse>;
   Favourites: ResolverTypeWrapper<FavouritesResponse>;
   Genre: ResolverTypeWrapper<GenreResponse>;
@@ -489,6 +517,7 @@ export type ResolversParentTypes = {
   CreateGenreInput: CreateGenreInput;
   CreateMemberInput: CreateMemberInput;
   CreateTrackInput: CreateTrackInput;
+  CreateUserInput: CreateUserInput;
   DeleteResponse: DeleteResponse;
   Favourites: FavouritesResponse;
   Genre: GenreResponse;
@@ -579,6 +608,10 @@ export type MemberResolvers<ContextType = Context, ParentType extends ResolversP
 };
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  addArtistToFavourites?: Resolver<Maybe<ResolversTypes['Favourites']>, ParentType, ContextType, RequireFields<MutationAddArtistToFavouritesArgs, 'id'>>;
+  addBandToFavourites?: Resolver<Maybe<ResolversTypes['Favourites']>, ParentType, ContextType, RequireFields<MutationAddBandToFavouritesArgs, 'id'>>;
+  addGenreToFavourites?: Resolver<Maybe<ResolversTypes['Favourites']>, ParentType, ContextType, RequireFields<MutationAddGenreToFavouritesArgs, 'id'>>;
+  addTrackToFavourites?: Resolver<Maybe<ResolversTypes['Favourites']>, ParentType, ContextType, RequireFields<MutationAddTrackToFavouritesArgs, 'id'>>;
   createAlbum?: Resolver<ResolversTypes['Album'], ParentType, ContextType, RequireFields<MutationCreateAlbumArgs, 'input'>>;
   createArtist?: Resolver<ResolversTypes['Artist'], ParentType, ContextType, RequireFields<MutationCreateArtistArgs, 'input'>>;
   createBand?: Resolver<ResolversTypes['Band'], ParentType, ContextType, RequireFields<MutationCreateBandArgs, 'input'>>;

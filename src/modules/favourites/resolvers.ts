@@ -1,9 +1,24 @@
 import { Resolvers } from '../../types'
+import { Favourite } from './types'
 
 export const resolvers: Resolvers = {
     Query: {
         favourites: (_, __, { dataSources }) => {
-            return dataSources.favouritesService.getFavourites()
+            return dataSources.favouritesService.getAllItems()
+        },
+    },
+    Mutation: {
+        addArtistToFavourites(_, { id }, { dataSources }) {
+            return dataSources.favouritesService.addItem(id, Favourite.ARTISTS)
+        },
+        addBandToFavourites(_, { id }, { dataSources }) {
+            return dataSources.favouritesService.addItem(id, Favourite.BANDS)
+        },
+        addGenreToFavourites(_, { id }, { dataSources }) {
+            return dataSources.favouritesService.addItem(id, Favourite.GENRES)
+        },
+        addTrackToFavourites(_, { id }, { dataSources }) {
+            return dataSources.favouritesService.addItem(id, Favourite.TRACKS)
         },
     },
     Favourites: {

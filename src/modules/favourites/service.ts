@@ -1,8 +1,8 @@
 import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest'
 
 import { dotEnvConfig } from '../../config'
-import { Context } from '../../types'
-import { FavouritesResponse } from './types'
+import { Context, Id } from '../../types'
+import { Favourite, FavouritesResponse } from './types'
 
 export class FavouritesService extends RESTDataSource<Context> {
     constructor() {
@@ -14,5 +14,8 @@ export class FavouritesService extends RESTDataSource<Context> {
         request.headers.set('Authorization', `Bearer ${this.context.token}`)
     }
 
-    getFavourites = (): Promise<FavouritesResponse> => this.get('/')
+    getAllItems = (): Promise<FavouritesResponse> => this.get('/')
+
+    addItem = (id: Id, type: Favourite): Promise<FavouritesResponse> =>
+        this.put('/add', { id, type })
 }
