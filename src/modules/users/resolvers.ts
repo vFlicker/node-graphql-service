@@ -1,4 +1,4 @@
-import { Resolvers } from '../../types'
+import { Resolvers } from '../../common'
 
 export const resolvers: Resolvers = {
     Query: {

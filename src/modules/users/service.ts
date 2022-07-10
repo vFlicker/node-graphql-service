@@ -1,7 +1,7 @@
 import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest'
 
 import { dotEnvConfig } from '../../config'
-import { Context, Id } from '../../types'
+import { Context, Id } from '../../common'
 import { JWT, JWTInput, UserResponse } from './types'
 
 export class UsersService extends RESTDataSource<Context> {

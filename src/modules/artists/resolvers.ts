@@ -1,4 +1,4 @@
-import { Pagination, Resolvers } from '../../types'
+import { Pagination, Resolvers } from '../../common'
 
 export const resolvers: Resolvers = {
     Query: {

@@ -1,4 +1,4 @@
-import { Pagination, Resolvers } from '../../types'
+import { Pagination, Resolvers } from '../../common'
 import { ArtistsService } from '../artists'
 import { Member } from './types'
 

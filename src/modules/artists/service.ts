@@ -1,5 +1,5 @@
 import { dotEnvConfig } from '../../config'
-import { Service } from '../service'
+import { Service } from '../../common'
 import { ArtistResponse } from './types'
 
 export class ArtistsService extends Service<ArtistResponse> {

@@ -1,4 +1,4 @@
-import { Resolvers } from '../../types'
+import { Resolvers } from '../../common'
 import { Favourite } from './types'
 
 export const resolvers: Resolvers = {

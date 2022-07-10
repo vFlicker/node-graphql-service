@@ -1,7 +1,7 @@
 import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest'
 
 import { dotEnvConfig } from '../../config'
-import { Context, Id } from '../../types'
+import { Context, Id } from '../../common'
 import { Favourite, FavouritesResponse } from './types'
 
 export class FavouritesService extends RESTDataSource<Context> {

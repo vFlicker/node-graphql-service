@@ -16,15 +16,18 @@ import {
     UsersService,
 } from '../modules'
 
-const typesArray = loadFilesSync(
-    path.resolve(__dirname, '../modules/**/schema.ts'),
-)
+const typesArray = loadFilesSync(path.resolve(__dirname, '../**/schema.ts'))
 const resolversArray = loadFilesSync(
     path.resolve(__dirname, '../modules/**/resolvers.ts'),
 )
 
 const typeDefs = mergeTypeDefs(typesArray)
 const resolvers = mergeResolvers(resolversArray)
+
+const context = ({ req }: ExpressContext) => {
+    const token = (req.headers && req.headers.authorization) || ''
+    return { token }
+}
 
 export const dataSources = () => ({
     albumsService: new AlbumsService(),
@@ -35,11 +38,6 @@ export const dataSources = () => ({
     tracksService: new TracksService(),
     usersService: new UsersService(),
 })
-
-const context = ({ req }: ExpressContext) => {
-    const token = (req.headers && req.headers.authorization) || ''
-    return { token }
-}
 
 export const apolloServerConfig: ApolloServerExpressConfig = {
     typeDefs,

@@ -1,10 +1,15 @@
 import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest'
 
-import { Context, Id, DeleteResponse } from '../types'
+import { Context, Id } from './types'
 
 const enum Pagination {
     Offset = 0,
     Limit = 5,
+}
+
+type DeleteResponse = {
+    acknowledged: boolean
+    deletedCount: number
 }
 
 export class Service<ItemResponse> extends RESTDataSource<Context> {
