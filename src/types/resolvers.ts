@@ -104,7 +104,11 @@ export type CreateTrackInput = {
   artistsIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   bandsIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   duration?: InputMaybe<Scalars['Int']>;
+  email: Scalars['String'];
+  firstName: Scalars['String'];
   genresIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  lastName: Scalars['String'];
+  password: Scalars['String'];
   released?: InputMaybe<Scalars['Int']>;
   title: Scalars['String'];
 };
@@ -156,6 +160,7 @@ export type Mutation = {
   deleteBand: DeleteResponse;
   deleteGenre: DeleteResponse;
   deleteTrack: DeleteResponse;
+  register: User;
   updateAlbum: Album;
   updateArtist: Artist;
   updateBand: Band;
@@ -214,6 +219,11 @@ export type MutationDeleteTrackArgs = {
 };
 
 
+export type MutationRegisterArgs = {
+  input: CreateTrackInput;
+};
+
+
 export type MutationUpdateAlbumArgs = {
   id: Scalars['ID'];
   input: UpdateAlbumInput;
@@ -254,10 +264,10 @@ export type Query = {
   favourites?: Maybe<Favourites>;
   genre?: Maybe<Genre>;
   genres: Array<Genre>;
-  jwt?: Maybe<Scalars['String']>;
+  jwt: Scalars['String'];
   track?: Maybe<Track>;
   tracks: Array<Track>;
-  user?: Maybe<User>;
+  user: User;
 };
 
 
@@ -363,10 +373,10 @@ export type UpdateTrackInput = {
 export type User = {
   __typename?: 'User';
   email: Scalars['String'];
-  firstName?: Maybe<Scalars['String']>;
+  firstName: Scalars['String'];
   id: Scalars['ID'];
-  lastName?: Maybe<Scalars['String']>;
-  password?: Maybe<Scalars['String']>;
+  lastName: Scalars['String'];
+  password: Scalars['String'];
 };
 
 
@@ -579,6 +589,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   deleteBand?: Resolver<ResolversTypes['DeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteBandArgs, 'id'>>;
   deleteGenre?: Resolver<ResolversTypes['DeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteGenreArgs, 'id'>>;
   deleteTrack?: Resolver<ResolversTypes['DeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteTrackArgs, 'id'>>;
+  register?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'input'>>;
   updateAlbum?: Resolver<ResolversTypes['Album'], ParentType, ContextType, RequireFields<MutationUpdateAlbumArgs, 'id' | 'input'>>;
   updateArtist?: Resolver<ResolversTypes['Artist'], ParentType, ContextType, RequireFields<MutationUpdateArtistArgs, 'id' | 'input'>>;
   updateBand?: Resolver<ResolversTypes['Band'], ParentType, ContextType, RequireFields<MutationUpdateBandArgs, 'id' | 'input'>>;
@@ -596,10 +607,10 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
   favourites?: Resolver<Maybe<ResolversTypes['Favourites']>, ParentType, ContextType>;
   genre?: Resolver<Maybe<ResolversTypes['Genre']>, ParentType, ContextType, RequireFields<QueryGenreArgs, 'id'>>;
   genres?: Resolver<Array<ResolversTypes['Genre']>, ParentType, ContextType>;
-  jwt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<QueryJwtArgs, 'email' | 'password'>>;
+  jwt?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<QueryJwtArgs, 'email' | 'password'>>;
   track?: Resolver<Maybe<ResolversTypes['Track']>, ParentType, ContextType, RequireFields<QueryTrackArgs, 'id'>>;
   tracks?: Resolver<Array<ResolversTypes['Track']>, ParentType, ContextType>;
-  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
 };
 
 export type TrackResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Track'] = ResolversParentTypes['Track']> = {
@@ -616,10 +627,10 @@ export type TrackResolvers<ContextType = Context, ParentType extends ResolversPa
 
 export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  password?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

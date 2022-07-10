@@ -2,11 +2,16 @@ import { Resolvers } from '../../types'
 
 export const resolvers: Resolvers = {
     Query: {
-        jwt: (_, userData, { dataSources }) => {
-            return dataSources.usersService.jwt(userData)
+        jwt: (_, input, { dataSources }) => {
+            return dataSources.usersService.jwt(input)
         },
         user: (_, { id }, { dataSources }) => {
             return dataSources.usersService.getUserById(id)
+        },
+    },
+    Mutation: {
+        register: (_, { input }, { dataSources }) => {
+            return dataSources.usersService.register(input)
         },
     },
     User: {

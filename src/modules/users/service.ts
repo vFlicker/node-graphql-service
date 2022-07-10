@@ -1,17 +1,8 @@
 import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest'
 
 import { dotEnvConfig } from '../../config'
-import { Context } from '../../types'
-import { UserResponse } from './types'
-
-type JWT = {
-    jwt: string
-}
-
-type UserData = {
-    email: string
-    password: string
-}
+import { Context, Id } from '../../types'
+import { JWT, JWTInput, UserResponse } from './types'
 
 export class UsersService extends RESTDataSource<Context> {
     constructor() {
@@ -23,10 +14,14 @@ export class UsersService extends RESTDataSource<Context> {
         request.headers.set('Authorization', `Bearer ${this.context.token}`)
     }
 
-    jwt = async (userData: UserData): Promise<string> => {
-        const response = (await this.post('/login', userData)) as JWT
+    jwt = async (data: JWTInput): Promise<string> => {
+        const response = (await this.post('/login', data)) as JWT
         return response.jwt
     }
 
-    getUserById = (id: string): Promise<UserResponse> => this.get(`/${id}`)
+    getUserById = (id: Id): Promise<UserResponse> => this.get(`/${id}`)
+
+    register = <T extends object>(data: T): Promise<UserResponse> => {
+        return this.post('/register', data)
+    }
 }
