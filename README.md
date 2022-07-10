@@ -14,14 +14,16 @@ npm install
 
 ### Running application
 
-Rename .env.example to .env
+> Rename .env.example to .env
 
-To run services:
+To run application:
+
 ```
 npm start
 ```
 
 To build the application:
+
 ```
 npm run build
 ```
