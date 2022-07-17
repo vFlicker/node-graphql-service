@@ -1,0 +1,16 @@
+schema: './src/**/schema.ts'
+generates:
+    './src/common/resolvers.types.ts':
+        config:
+            contextType: './types#Context'
+            mappers:
+                Album: '../modules/albums#AlbumResponse'
+                Artist: '../modules/artists#ArtistResponse'
+                Band: '../modules/bands#BandResponse'
+                Favourites: '../modules/favourites#FavouritesResponse'
+                Genre: '../modules/genres#GenreResponse'
+                Track: '../modules/tracks#TrackResponse'
+                User: '../modules/users#UserResponse'
+        plugins:
+            - typescript
+            - typescript-resolvers

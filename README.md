@@ -1,5 +1,38 @@
-## GraphQL Basics
+## GraphQL Service
 
-1. [Link to task](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/graphql-service/assignment.md)
-2. Deadline date: 2022-07-10 23:59
-3. Max score: 160
+### Downloading
+
+```
+git clone {repository URL}
+```
+
+### Installing
+
+```
+npm install
+```
+
+### Running application
+
+> Rename .env.example to .env
+
+To run application:
+
+```
+npm start
+```
+
+To build the application:
+
+```
+npm run build
+```
+
+
+### How use mutations
+1. Create a new user using the post Postman;
+1. Use jwt Query to get jwt token
+1. Add this jwt token in Apollo studio, tab Headers:
+    1. header key: Authorization
+    1. value: {token}
+1. Now you can user any mutations
