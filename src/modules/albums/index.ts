@@ -1,2 +1,2 @@
-export * from './service'
-export { AlbumResponse } from './types'
+export * from './service';
+export { AlbumResponse } from './types';

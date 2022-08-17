@@ -1,8 +1,8 @@
-import { gql } from 'apollo-server'
+import { gql } from 'apollo-server';
 
 export const typeDefs = gql`
-    type DeleteResponse {
-        acknowledged: Boolean
-        deletedCount: Int
-    }
-`
+  type DeleteResponse {
+    acknowledged: Boolean
+    deletedCount: Int
+  }
+`;

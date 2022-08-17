@@ -1,3 +1,3 @@
-import { server, startApolloServer } from './app'
+import { startApolloServer } from './app';
 
-startApolloServer(server)
+startApolloServer();

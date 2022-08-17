@@ -1,9 +1,9 @@
-import { dotEnvConfig } from '../../config'
-import { Service } from '../../common'
-import { TrackResponse } from './types'
+import { dotEnvConfig } from '../../config';
+import { Service } from '../../common';
+import { TrackResponse } from './types';
 
 export class TracksService extends Service<TrackResponse> {
-    constructor() {
-        super(dotEnvConfig.TRACKS_API)
-    }
+  constructor() {
+    super(dotEnvConfig.TRACKS_API);
+  }
 }

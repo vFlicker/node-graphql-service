@@ -1,38 +1,42 @@
-## GraphQL Service
+# GraphQL Service
 
-### Downloading
+## Prerequisites
+
+Repository with endpoints - [Download & Install](https://github.com/rolling-scopes-school/node-graphql-service)
+
+## Downloading
 
 ```
 git clone {repository URL}
 ```
 
-### Installing
+## Installation
 
 ```
 npm install
 ```
 
-### Running application
+## Running application
 
-> Rename .env.example to .env
-
-To run application:
+Rename `.env.example` to `.env`
 
 ```
 npm start
 ```
 
-To build the application:
+## Building application
 
 ```
 npm run build
 ```
 
+## How to use it?
 
-### How use mutations
-1. Create a new user using the post Postman;
-1. Use jwt Query to get jwt token
-1. Add this jwt token in Apollo studio, tab Headers:
-    1. header key: Authorization
-    1. value: {token}
-1. Now you can user any mutations
+1. Open a browser at http://localhost:4000/
+2. Use the register mutation to create a new user
+3. Use the jwt query to get a token
+4. Use this token in Apollo Studio
+    1. Click on the tab «Headers»
+    2. Header key: Authorization
+    3. Value: {received_token}
+5. Enjoy using queries and mutations

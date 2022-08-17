@@ -5,9 +5,10 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "generate": "graphql-codegen",
         "start": "npm run generate && ts-node-dev ./src/index.ts",
-        "build": "rimraf ./build && npm run generate && tsc"
+        "build": "rimraf ./build && npm run generate && tsc",
+        "generate": "graphql-codegen",
+        "lint": "eslint \"src/**/*.ts\" --fix"
     },
     "dependencies": {
         "@graphql-tools/load-files": "^6.6.0",
@@ -24,6 +25,7 @@
         "@typescript-eslint/eslint-plugin": "^5.30.5",
         "@typescript-eslint/parser": "^5.30.5",
         "eslint": "^8.19.0",
+        "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.2.1",
         "prettier": "^2.7.1",
         "rimraf": "^3.0.2",

@@ -1,29 +1,29 @@
-import { Pagination, Resolvers } from '../../common'
+import { Pagination, Resolvers } from '../../common';
 
 export const resolvers: Resolvers = {
-    Query: {
-        artists: (_, { offset, limit }: Pagination, { dataSources }) => {
-            return dataSources.artistsService.getAllItems(offset, limit)
-        },
-        artist: (_, { id }, { dataSources }) => {
-            return dataSources.artistsService.getItemById(id)
-        },
+  Query: {
+    artists: (_, { offset, limit }: Pagination, { dataSources }) => {
+      return dataSources.artistsService.getAllItems(offset, limit);
     },
-    Mutation: {
-        createArtist: (_, { input }, { dataSources }) => {
-            return dataSources.artistsService.createItem(input)
-        },
-        updateArtist: (_, { id, input }, { dataSources }) => {
-            return dataSources.artistsService.updateItem(id, input)
-        },
-        deleteArtist: (_, { id }, { dataSources }) => {
-            return dataSources.artistsService.deleteItem(id)
-        },
+    artist: (_, { id }, { dataSources }) => {
+      return dataSources.artistsService.getItemById(id);
     },
-    Artist: {
-        id: ({ _id }) => _id,
-        bands: ({ bandsIds }, _, { dataSources }) => {
-            return dataSources.bandsService.getItemsByIds(bandsIds)
-        },
+  },
+  Mutation: {
+    createArtist: (_, { input }, { dataSources }) => {
+      return dataSources.artistsService.createItem(input);
     },
-}
+    updateArtist: (_, { id, input }, { dataSources }) => {
+      return dataSources.artistsService.updateItem(id, input);
+    },
+    deleteArtist: (_, { id }, { dataSources }) => {
+      return dataSources.artistsService.deleteItem(id);
+    },
+  },
+  Artist: {
+    id: ({ _id }) => _id,
+    bands: ({ bandsIds }, _, { dataSources }) => {
+      return dataSources.bandsService.getItemsByIds(bandsIds);
+    },
+  },
+};

@@ -1,2 +1,2 @@
-export * from './service'
-export { TrackResponse } from './types'
+export * from './service';
+export { TrackResponse } from './types';
